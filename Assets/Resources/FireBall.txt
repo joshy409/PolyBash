@@ -1,0 +1,173 @@
+{
+  "duration": 50,
+  "hitboxes": [
+    {
+      "name": "Charge3",
+      "beginFrame": 30,
+      "duration": 0,
+      "damage": 60,
+      "hitStun": 30,
+      "launchVector": [
+        0,
+        8,
+        2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.4829598,
+        0.4829598,
+        0.4829598
+      ],
+      "offset": [
+        0.227,
+        0.771,
+        0.745
+      ],
+      "linearVelocity": [
+        0,
+        0,
+        0
+      ],
+      "angularVelocity": [
+        0,
+        0,
+        0
+      ],
+      "scaleVelocity": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Projectile",
+      "beginFrame": 31,
+      "duration": 120,
+      "damage": 99,
+      "hitStun": 30,
+      "launchVector": [
+        0,
+        8,
+        40
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.7679061,
+        0.7679061,
+        0.7679061
+      ],
+      "offset": [
+        0.227,
+        0.84,
+        0.876
+      ],
+      "linearVelocity": [
+        0,
+        0,
+        8
+      ],
+      "angularVelocity": [
+        0,
+        0,
+        0
+      ],
+      "scaleVelocity": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Charge2",
+      "beginFrame": 29,
+      "duration": 0,
+      "damage": 60,
+      "hitStun": 30,
+      "launchVector": [
+        0,
+        8,
+        40
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.4829598,
+        0.4829598,
+        0.4829598
+      ],
+      "offset": [
+        0.227,
+        0.711,
+        0.425
+      ],
+      "linearVelocity": [
+        0,
+        0,
+        0
+      ],
+      "angularVelocity": [
+        0,
+        0,
+        0
+      ],
+      "scaleVelocity": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Charge1",
+      "beginFrame": 28,
+      "duration": 0,
+      "damage": 60,
+      "hitStun": 30,
+      "launchVector": [
+        0,
+        8,
+        2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.4829598,
+        0.4829598,
+        0.4829598
+      ],
+      "offset": [
+        0.227,
+        0.662,
+        0.061
+      ],
+      "linearVelocity": [
+        0,
+        0,
+        0
+      ],
+      "angularVelocity": [
+        0,
+        0,
+        0
+      ],
+      "scaleVelocity": [
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

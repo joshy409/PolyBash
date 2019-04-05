@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class WireFrameController : MonoBehaviour {
 
+    // Use this for initialization
 
     [SerializeField] GameObject trigger;
-    // Use this for initialization
     MeshRenderer mesh;
+
 	void Start () {
         mesh = GetComponent<MeshRenderer>();
 	}

@@ -9,6 +9,7 @@ public class Status : MonoBehaviour {
     [SerializeField] float health = 100;
     [SerializeField] EnemySpawner enemySpawner;
     [SerializeField] TextMeshPro playerText;
+    [SerializeField] GameObject rightHadukenTrigger;
     public bool isDown = true;
 
     Animator anim;
@@ -75,6 +76,7 @@ public class Status : MonoBehaviour {
         if (playerText.enabled)
         {
             playerText.text = "Put Both of Hand Inside the Trigger Box";
+            rightHadukenTrigger.GetComponent<BoxCollider>().enabled = true;
         }
     }
 }

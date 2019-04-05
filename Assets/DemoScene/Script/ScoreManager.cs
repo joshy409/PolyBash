@@ -41,4 +41,10 @@ public class ScoreManager : MonoBehaviour
         multiplier += multi;
     }
 
+    public static void Reset()
+    {
+        score = 0;
+        multiplier = 1;
+        HighScore = 0;
+    }
 }

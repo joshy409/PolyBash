@@ -13,6 +13,9 @@ public class Movement : MonoBehaviour
     [SerializeField] float speed = 1;
     [SerializeField] float rotationSpeed = 4;
     [SerializeField] TextMeshPro playerText;
+    [SerializeField] IntroSequence introSequence;
+    [SerializeField] TextMeshPro sambaTextPro;
+    [SerializeField] GameObject startGame;
     public float ringRadius = 8;
 
     public bool moving = false;
@@ -45,42 +48,57 @@ public class Movement : MonoBehaviour
             }
         }
 
-        if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) && OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
+        if (introSequence.startSecondIntroSequence)
         {
-            anim.SetBool("Samba", true);
-            moving = false;
-            ikControl.ikActive = false;
-        }
-
-        if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-        {
-            anim.SetBool("Samba", false);
-            moving = true;
-            ikControl.ikActive = true;
-        }
-            
-        if(anim.GetBool("Samba"))
-        {
-            multiDecayTimer = 0;
-            sambaMultiplierTimer += Time.deltaTime;
-            if(sambaMultiplierTimer >= 2)
+            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) && OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
             {
-                sambaMultiplierTimer = 0;
-                scoreManager.AddMultiplier(1);
+                if(sambaTextPro.enabled)
+                {
+                    sambaTextPro.text = "Samba Dancing adds multiplier to Score";
+                }
+                anim.SetBool("Samba", true);
+                moving = false;
+                ikControl.ikActive = false;
             }
-            playerText.text = "Samba : " + ((float)ScoreManager.multiplier + (sambaMultiplierTimer / 2)).ToString("F2");
-        }
-        else
-        {
-            sambaMultiplierTimer = 0;
-            multiDecayTimer += Time.deltaTime;
-            if (multiDecayTimer >= 2)
+
+            if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+            {
+                if (sambaTextPro.enabled)
+                {
+                    print("it arrived here");
+                    
+                    sambaTextPro.text = "Samba multiplier decays when your not dancing";
+                    StartCoroutine(PromptGameStartText());
+                }
+                anim.SetBool("Samba", false);
+                moving = true;
+                ikControl.ikActive = true;
+            }
+        
+            if (anim.GetBool("Samba"))
             {
                 multiDecayTimer = 0;
-                scoreManager.AddMultiplier(-1);
+                sambaMultiplierTimer += Time.deltaTime;
+                if (sambaMultiplierTimer >= 2)
+                {
+                    sambaMultiplierTimer = 0;
+                    scoreManager.AddMultiplier(1);
+                }
+                //playerText.text = "Samba : " + ((float)ScoreManager.multiplier + (sambaMultiplierTimer / 2)).ToString("F2");
             }
-            playerText.text = "Samba : " + ((float)ScoreManager.multiplier + (multiDecayTimer / 2)).ToString("F2");
+            else
+            {
+                sambaMultiplierTimer = 0;
+                multiDecayTimer += Time.deltaTime;
+                if (multiDecayTimer >= 2)
+                {
+                    multiDecayTimer = 0;
+                    scoreManager.AddMultiplier(-1);
+                }
+                //playerText.text = "Samba : " + ((float)ScoreManager.multiplier + (multiDecayTimer / 2)).ToString("F2");
+            }
         }
+        
     }
 
     private void Move()
@@ -119,6 +137,12 @@ public class Movement : MonoBehaviour
         
     }
 
-
+    IEnumerator PromptGameStartText()
+    {
+        yield return new WaitForSeconds(3f);
+        sambaTextPro.text = "Survive and score as high as possible!";
+        playerText.enabled = false;
+        startGame.SetActive(true);
+    }
 
 }

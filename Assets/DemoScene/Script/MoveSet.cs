@@ -53,6 +53,7 @@ public class MoveSet : MonoBehaviour
     [SerializeField] GameObject rightHadukenTrigger;
     [SerializeField] GameObject leftHadukenTrigger;
     [SerializeField] TextMeshPro playerText;
+    [SerializeField] IntroSequence introSequence;
 
     public bool isLeft = false;
     public bool isRight = false;
@@ -125,10 +126,6 @@ public class MoveSet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if ((OVRInput.Get(OVRInput.RawButton.LIndexTrigger) || OVRInput.Get(OVRInput.RawButton.RIndexTrigger)) && currentMove == -1)
-        //{
-        //    startAttack(0);
-        //}
         itterateAttack();
     }
     MoveJS importAttack(string pathField)
@@ -157,6 +154,10 @@ public class MoveSet : MonoBehaviour
         //print("attackItterated");
         moves[currentMove].Execute(currentFrame);
         currentFrame++;
+        if (playerText.enabled)
+        {
+            playerText.text = "Haduken!!!!!!!!!!!!";
+        }
 
         if (isRight)
         {
@@ -178,7 +179,19 @@ public class MoveSet : MonoBehaviour
             leftTrigger.enabled = true;
             isLeft = false;
             isRight = false;
-            playerText.text = "Haduken!!!!!!!!!!!!";
+
+            if (playerText.enabled)
+            {
+                if(!introSequence.startSecondIntroSequence)
+                {
+                    playerText.text = "You can also start Haduken from the left side. Try it";
+                    introSequence.startSecondIntroSequence = true;
+                } else
+                {
+                    playerText.text = "You can Samba Dance by holding both index Triggers. Samba Dancing adds multipliers to Score";
+                }
+                
+            }
         }
     }
 }

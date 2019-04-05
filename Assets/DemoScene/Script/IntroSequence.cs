@@ -12,7 +12,9 @@ public class IntroSequence : MonoBehaviour {
     IKControl ik;
     Movement move;
 
-	void Start () {
+    public bool startSecondIntroSequence = false;
+
+    void Start () {
         ik = player.GetComponent<IKControl>();
         move = player.GetComponent<Movement>();
 	}

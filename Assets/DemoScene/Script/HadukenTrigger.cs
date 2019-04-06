@@ -8,8 +8,7 @@ public class HadukenTrigger : MonoBehaviour {
     [SerializeField] MoveSet haduken;
     [SerializeField] HadukenFinishTrigger hadukenFinish;
     [SerializeField] TextMeshPro playerText;
-    [SerializeField] GameObject leftWireFrame;
-    [SerializeField] GameObject rightWireFrame;
+
 
     //booleans that check if each hand is touching the trigger
     bool leftHand;

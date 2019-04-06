@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class IntroSequence : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class IntroSequence : MonoBehaviour {
     [SerializeField] GameObject player;
     [SerializeField] TextMeshPro playerText;
     [SerializeField] TextMeshPro dummyText;
+    [SerializeField] PunchingBag punchingBag;
     IKControl ik;
     Movement move;
 
@@ -36,6 +38,7 @@ public class IntroSequence : MonoBehaviour {
                 player.GetComponent<Status>().enabled = true;
                 playerText.enabled = true;
                 dummyText.enabled = true;
+                punchingBag.enabled = true;
             }
         } 
 	}

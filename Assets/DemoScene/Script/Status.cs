@@ -10,8 +10,10 @@ public class Status : MonoBehaviour {
     [SerializeField] EnemySpawner enemySpawner;
     [SerializeField] TextMeshPro playerText;
     [SerializeField] GameObject rightHadukenTrigger;
+    [SerializeField] Animator fadeOut;
+    [SerializeField] GameObject startGame;
     public bool isDown = true;
-
+    public bool gameOver = false;
     Animator anim;
     Movement movement;
     IKControl ik;
@@ -25,38 +27,44 @@ public class Status : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (health <= 0)
-        {
-            anim.SetBool("Death", true);
-            isDown = true;
-            ik.ikActive = false;
-            ik.ikLook = false;
-            movement.moving = false;
-
-            //StartCoroutine(RestartScene());
+        if (!gameOver) { 
+		    if (health <= 0)
+            {
+                gameOver = true;
+                anim.SetBool("Death", true);
+                ik.ikActive = false;
+                ik.ikLook = false;
+                movement.moving = false;
+                enemySpawner.enabled = false;
+                fadeOut.SetBool("Fade", true);
+            }
         }
 
         if (isDown)
         {
-            if (OVRInput.Get(OVRInput.Button.One))
+            if (OVRInput.Get(OVRInput.Button.One) || OVRInput.Get(OVRInput.Button.Two) 
+                || OVRInput.Get(OVRInput.Button.Three) || OVRInput.Get(OVRInput.Button.Four))
             {
                 health = 100;
                 anim.SetBool("GetUp",true);
                 anim.SetBool("Death", false);
-
-                if (enemySpawner.enabled == false)
-                {
-                    enemySpawner.enabled = true;
-                }
+                gameOver = false;
             }
         }
 
 	}
-
-    IEnumerator RestartScene()
+    //gets called when fade out animation finishes
+    public void RestartGame()
     {
-        yield return new WaitForSeconds(5f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        transform.position = new Vector3(0,0,0);
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("DestroyEnemy");
+        foreach (var enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+        fadeOut.SetBool("Fade",false);
+        startGame.SetActive(true);
+        isDown = true;
     }
 
     void OnTriggerEnter(Collider col)
@@ -66,6 +74,7 @@ public class Status : MonoBehaviour {
             health -= 100;
         }
     }
+    //gets called when getting up animation finished
     public void GettingUpAnimationEnded()
     {
         anim.SetBool("GetUp", false);

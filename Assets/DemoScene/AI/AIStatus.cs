@@ -5,31 +5,38 @@ using UnityEngine.AI;
 
 public class AIStatus : MonoBehaviour {
 
-    [SerializeField] public ScoreManager scoreManager;
+    //[SerializeField] public ScoreManager scoreManager;
     [SerializeField] float health = 100;
     [SerializeField] float sinkSpeed = 1f;
+    private ScoreManager scoreManager;
     Animator anim;
     NavMeshAgent navi;
     public bool isSinking = false;
+    private bool isAlive = true;
     // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animator>();
         navi = GetComponent<NavMeshAgent>();
+        scoreManager = GameObject.Find("Player").GetComponent<ScoreManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
-        {
-            scoreManager.AddScore(100);
-            anim.SetBool("Death", true);
-            navi.enabled = false;
-            if (isSinking)
+        if (isAlive) { 
+            if (health <= 0)
             {
-                transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime, Space.World);
+                scoreManager.AddScore(100);
+                anim.SetBool("Death", true);
+                isAlive = false;
+                navi.enabled = false;
             }
+        }
+        if (isSinking)
+        {
+            navi.enabled = false;
+            transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime, Space.World);
         }
     }
     public void AIDeath()

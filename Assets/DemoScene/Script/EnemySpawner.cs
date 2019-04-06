@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
         if (spawnTimer <= 0) {
             Vector2 spawnpoint = Random.insideUnitCircle*6;
             GameObject g = Instantiate(enemy.gameObject, new Vector3(spawnpoint.x, 0, spawnpoint.y), Quaternion.identity);
-            //g.GetComponent<AIStatus>().scoreManager = scoreMan;
+            g.GetComponent<Animator>().SetFloat("RandomIdle", Random.Range(0,3));
             spawnTimer = spawnTimerDefault;
         }
     }

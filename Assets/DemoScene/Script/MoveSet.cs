@@ -184,11 +184,11 @@ public class MoveSet : MonoBehaviour
             {
                 if(!introSequence.startSecondIntroSequence)
                 {
-                    playerText.text = "You can also start Haduken from the left side. Try it";
+                    playerText.text = "You can also start Haduken from the left side";
                     introSequence.startSecondIntroSequence = true;
                 } else
                 {
-                    playerText.text = "You can Samba Dance by holding both index Triggers. Samba Dancing adds multipliers to Score";
+                    playerText.text = "Samba Dance by holding both index Triggers";
                 }
                 
             }

@@ -40,9 +40,10 @@ public class AIController : MonoBehaviour {
             anim.SetFloat("forwardSpeed", transform.InverseTransformDirection(navi.velocity).z);
         }
 
-        if (player.GetComponent<Status>().isDown)
+        if (player.GetComponent<Status>().gameOver)
         {
             navi.enabled = false;
+
         } else
         {
             //navi.enabled = true;

@@ -5,63 +5,9 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Locomotion
+  m_Name: TestLocomotion
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Blend
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: DirX
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: DirY
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: Haduken
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: Samba
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: LPunch
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: RPunch
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: Death
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: GetUp
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: Blend
     m_Type: 1
     m_DefaultFloat: 0
@@ -865,13 +811,13 @@ AnimatorStateMachine:
     m_Position: {x: 744, y: 96, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102321936567648508}
-    m_Position: {x: 804, y: -48, z: 0}
+    m_Position: {x: 768, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102120114022293232}
-    m_Position: {x: 816, y: -264, z: 0}
+    m_Position: {x: 780, y: -216, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102979989232925264}
-    m_Position: {x: 576, y: -156, z: 0}
+    m_Position: {x: 540, y: -108, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102576007258288534}
     m_Position: {x: 360, y: 300, z: 0}
@@ -893,4 +839,4 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 84, y: 132, z: 0}
   m_ExitPosition: {x: 456, y: 372, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102576007258288534}
+  m_DefaultState: {fileID: 1102871219266446290}

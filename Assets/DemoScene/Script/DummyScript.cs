@@ -24,10 +24,12 @@ public class DummyScript : MonoBehaviour
     NavMeshAgent nav;
     private AIStatus aiStatus;
     private AIController aiController;
+    private AudioSource audioSource;
 
     // Use this for initialization
     void Start()
     {
+        audioSource = transform.GetComponent<AudioSource>();
         aiStatus = GetComponent<AIStatus>();
         aiController = GetComponent<AIController>();
         tf = GetComponent<Transform>();
@@ -45,14 +47,17 @@ public class DummyScript : MonoBehaviour
         if (stunTimer < 0)
         {
             stunTimer = 0;
-            if (nav && tf.position.y<=floorHeight+Mathf.Epsilon&&aiController.WantsNavAgentEnabled())
-            {
-                nav.enabled = true;
-            }
+            if(aiController != null) { 
+                if (nav && tf.position.y<=floorHeight+Mathf.Epsilon&&aiController.WantsNavAgentEnabled())
+                {
+                    nav.enabled = true;
+                }    
+            }   
             //tf.position = startingPosition;
             //velocity = new Vector3(0, 0, 0);
             //TODO: re enable AI
-        }
+        } 
+        
         launch();
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -101,6 +106,7 @@ public class DummyScript : MonoBehaviour
         nav.enabled = false;
         //  sm.score += (int)launchVector.magnitude;
         aiStatus.TakeDamage(damage);
+        audioSource.Play();
     }
 
     void launch()

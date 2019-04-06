@@ -7,28 +7,22 @@ public class ScoreManager : MonoBehaviour
 {
     public static int score;
     public static int multiplier;
-    public TextMeshPro txt;
     public static int HighScore;
 
     void Start ()
     {
         score = 0;
         multiplier = 1;
-        Debug.Log(name, this);
     }
 	
     public void AddScore(int point)
     {
-
+        print("add score called");
         score += point *multiplier;
         if (score >= HighScore)
         {
             HighScore = score;
         }
-        txt.text = "Score: " + score.ToString();
-        Debug.Log(name, this);
-        Debug.Log(score, this);
-        Debug.Log(multiplier, this);
     }
 
     public void AddMultiplier(int multi)
@@ -41,10 +35,19 @@ public class ScoreManager : MonoBehaviour
         multiplier += multi;
     }
 
+    public static void SetMultiplier(int multi)
+    {
+        if(multi < 1)
+        {
+            multiplier = 1;
+            return;
+        }
+        multiplier = multi;
+    }
+
     public static void Reset()
     {
         score = 0;
         multiplier = 1;
-        HighScore = 0;
     }
 }

@@ -34,7 +34,7 @@ public class IKControl : MonoBehaviour
             {
 
                 // Set the look target position, if one has been assigned
-                if (ikLook == true)
+                if (ikLook)
                 {
                     RaycastHit hit;
                     Physics.Raycast(referenceObj.transform.position, referenceObj.transform.forward, out hit, 100f);

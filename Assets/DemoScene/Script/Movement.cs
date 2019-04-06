@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Movement : MonoBehaviour
 {
     public ScoreManager scoreManager;
-    private float sambaMultiplierTimer;
     private float multiDecayTimer;
     Animator anim;
     IKControl ikControl;
@@ -14,8 +14,12 @@ public class Movement : MonoBehaviour
     [SerializeField] float rotationSpeed = 4;
     [SerializeField] TextMeshPro playerText;
     [SerializeField] IntroSequence introSequence;
-    [SerializeField] TextMeshPro sambaTextPro;
+    [SerializeField] TextMeshPro sambaText;
     [SerializeField] GameObject startGame;
+    [SerializeField] Light sambaLight;
+    [SerializeField] AudioSource horns;
+    AudioMixerSnapshot sambaSnap;
+    AudioMixerSnapshot noSamba;
     public float ringRadius = 8;
 
     public bool moving = false;
@@ -24,9 +28,11 @@ public class Movement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        noSamba = horns.outputAudioMixerGroup.audioMixer.FindSnapshot("NotSamba");
+        sambaSnap = horns.outputAudioMixerGroup.audioMixer.FindSnapshot("Samba");
         anim = GetComponent<Animator>();
         ikControl = GetComponent<IKControl>();
-        sambaMultiplierTimer = 0;
+        multiDecayTimer = 1;
     }
 
     // Update is called once per frame
@@ -50,52 +56,60 @@ public class Movement : MonoBehaviour
 
         if (introSequence.startSecondIntroSequence)
         {
+            // samba dance
             if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) && OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
             {
-                if(sambaTextPro.enabled)
+                if(playerText.enabled)
                 {
-                    sambaTextPro.text = "Samba Dancing adds multiplier to Score";
+                    playerText.text = "Samba Dancing adds multiplier to Score";
+                    if (!sambaText.enabled)
+                    {
+                        sambaText.enabled = true;
+                    }
                 }
                 anim.SetBool("Samba", true);
                 moving = false;
                 ikControl.ikActive = false;
+                sambaLight.enabled = true;
             }
 
             if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
-                if (sambaTextPro.enabled)
+                if (playerText.enabled)
                 {
-                    print("it arrived here");
-                    
-                    sambaTextPro.text = "Samba multiplier decays when your not dancing";
+                    playerText.text = "Samba multiplier decays";
                     StartCoroutine(PromptGameStartText());
                 }
                 anim.SetBool("Samba", false);
                 moving = true;
                 ikControl.ikActive = true;
+                sambaLight.enabled = false;
             }
         
             if (anim.GetBool("Samba"))
             {
-                multiDecayTimer = 0;
-                sambaMultiplierTimer += Time.deltaTime;
-                if (sambaMultiplierTimer >= 2)
-                {
-                    sambaMultiplierTimer = 0;
-                    scoreManager.AddMultiplier(1);
+                //StartCoroutine(AudioController.FadeIn(horns, 0.3f));
+                sambaSnap.TransitionTo(0.5f);
+                multiDecayTimer += Time.deltaTime / 2;
+                ScoreManager.SetMultiplier((int)multiDecayTimer);
+                if (sambaText.enabled) { 
+                    sambaText.text = "Samba : " + multiDecayTimer.ToString("F2");
                 }
-                //playerText.text = "Samba : " + ((float)ScoreManager.multiplier + (sambaMultiplierTimer / 2)).ToString("F2");
             }
             else
             {
-                sambaMultiplierTimer = 0;
-                multiDecayTimer += Time.deltaTime;
-                if (multiDecayTimer >= 2)
+                //StartCoroutine(AudioController.FadeOut(horns, 0.3f));
+                noSamba.TransitionTo(0.3f);
+                multiDecayTimer -= Time.deltaTime / 3;
+                if (multiDecayTimer < 1)
                 {
-                    multiDecayTimer = 0;
-                    scoreManager.AddMultiplier(-1);
+                    multiDecayTimer = 1;
                 }
-                //playerText.text = "Samba : " + ((float)ScoreManager.multiplier + (multiDecayTimer / 2)).ToString("F2");
+                ScoreManager.SetMultiplier((int)multiDecayTimer);
+                if (sambaText.enabled)
+                {
+                    sambaText.text = "Samba : " + (multiDecayTimer).ToString("F2");
+                }
             }
         }
         
@@ -140,9 +154,10 @@ public class Movement : MonoBehaviour
     IEnumerator PromptGameStartText()
     {
         yield return new WaitForSeconds(3f);
-        sambaTextPro.text = "Survive and score as high as possible!";
-        playerText.enabled = false;
-        startGame.SetActive(true);
+        playerText.text = "Survive and score as high as possible!";
+        if (!startGame.activeSelf) { 
+            startGame.SetActive(true);
+        }
     }
 
 }

@@ -1,6 +1,6 @@
 # SambaBash
 Assessement Project for Crossplatform Development__
-3rd Person VR Haduken Samba Survival__
+3rd Person VR Haduken Samba Survival
 
 
 ![](Assets/Resources/Haduken.gif)
@@ -10,7 +10,7 @@ AIE Game Programming Class of 2020
 
 David Krepel__
 David Warford__
-Joshua Yang__
+Joshua Yang
 
 Music by HOME - Resonance, Electronic Gems__
 https://www.youtube.com/watch?v=8GW6sLrK40k&list=RDQMkwyhe_-XSfs&index=2

@@ -7,7 +7,7 @@ Assessement Project for Crossplatform Development<br />
 
 ## Play it
 itch.io<br />
-[Samba Bash](chttps://rook1899.itch.io/samba-bash)
+[Samba Bash](https://rook1899.itch.io/samba-bash)
 
 ## Credit
 AIE Game Programming, Class of 2020

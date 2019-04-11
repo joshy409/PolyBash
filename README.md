@@ -6,7 +6,7 @@ Assessement Project for Crossplatform Development<br />
 ![](Assets/Resources/Haduken.gif)
 
 ## Credit
-AIE Game Programming Class of 2020
+AIE Game Programming, Class of 2020
 
 David Krepel<br />
 David Warford<br />

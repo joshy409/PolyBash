@@ -6,8 +6,7 @@ Assessement Project for Crossplatform Development<br />
 ![](Assets/Resources/Haduken.gif)
 
 ## Play it
-itch.io<br />
-[Samba Bash](https://rook1899.itch.io/samba-bash)
+[Samba Bash itch.io](https://rook1899.itch.io/samba-bash)
 
 ## Credit
 AIE Game Programming, Class of 2020

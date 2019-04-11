@@ -1,4 +1,4 @@
-# SambaBash
+# Samba Bash
 Assessement Project for Crossplatform Development<br />
 3rd Person VR Haduken Samba Survival
 

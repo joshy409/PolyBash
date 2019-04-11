@@ -12,7 +12,7 @@ public class AIStatus : MonoBehaviour {
     Animator anim;
     NavMeshAgent navi;
     public bool isSinking = false;
-    private bool isAlive = true;
+    public bool isAlive = true;
     // Use this for initialization
     void Start()
     {
@@ -46,7 +46,6 @@ public class AIStatus : MonoBehaviour {
     }
     IEnumerator SinkAndDestroy()
     {
-        print("AI Died");
         yield return new WaitForSeconds(2.5f);
         Destroy(gameObject,1f);
     }
@@ -55,14 +54,6 @@ public class AIStatus : MonoBehaviour {
     public void TakeDamage(float damage)
     { 
         health -= damage;
-    }
-
-    void OnTriggerEnter(Collider col)
-    {
-        //if (col.CompareTag("LeftHand") || col.CompareTag("RightHand"))
-        //{
-        //    health -= 100;
-        //}
     }
 
     public void MutantDeathEnd()

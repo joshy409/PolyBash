@@ -8,8 +8,10 @@ public class Movement : MonoBehaviour
 {
     public ScoreManager scoreManager;
     private float multiDecayTimer;
+    private float sambaDisplay;
     Animator anim;
     IKControl ikControl;
+    Status status;
     [SerializeField] float speed = 1;
     [SerializeField] float rotationSpeed = 4;
     [SerializeField] TextMeshPro playerText;
@@ -32,6 +34,7 @@ public class Movement : MonoBehaviour
         sambaSnap = horns.outputAudioMixerGroup.audioMixer.FindSnapshot("Samba");
         anim = GetComponent<Animator>();
         ikControl = GetComponent<IKControl>();
+        status = GetComponent<Status>();
         multiDecayTimer = 1;
     }
 
@@ -54,7 +57,7 @@ public class Movement : MonoBehaviour
             }
         }
 
-        if (introSequence.startSecondIntroSequence)
+        if (introSequence.startSecondIntroSequence && !status.gameOver)
         {
             // samba dance
             if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) && OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
@@ -85,30 +88,33 @@ public class Movement : MonoBehaviour
                 ikControl.ikActive = true;
                 sambaLight.enabled = false;
             }
-        
+            
             if (anim.GetBool("Samba"))
             {
                 //StartCoroutine(AudioController.FadeIn(horns, 0.3f));
                 sambaSnap.TransitionTo(0.5f);
-                multiDecayTimer += Time.deltaTime / 2;
-                ScoreManager.SetMultiplier((int)multiDecayTimer);
+                multiDecayTimer += Time.deltaTime;
+                sambaDisplay = (0.5f * Mathf.Pow(multiDecayTimer, 2));
+                ScoreManager.SetMultiplier((int)sambaDisplay);
                 if (sambaText.enabled) { 
-                    sambaText.text = "Samba : " + multiDecayTimer.ToString("F2");
+                    sambaText.text = "Samba : " + sambaDisplay.ToString("F2");
                 }
             }
             else
             {
                 //StartCoroutine(AudioController.FadeOut(horns, 0.3f));
                 noSamba.TransitionTo(0.3f);
-                multiDecayTimer -= Time.deltaTime / 3;
-                if (multiDecayTimer < 1)
+                multiDecayTimer -= Time.deltaTime / 4;
+                sambaDisplay = (0.5f * Mathf.Pow(multiDecayTimer, 2));
+                if (sambaDisplay < 1)
                 {
+                    sambaDisplay = 1;
                     multiDecayTimer = 1;
                 }
-                ScoreManager.SetMultiplier((int)multiDecayTimer);
+                ScoreManager.SetMultiplier((int)sambaDisplay);
                 if (sambaText.enabled)
                 {
-                    sambaText.text = "Samba : " + (multiDecayTimer).ToString("F2");
+                    sambaText.text = "Samba : " + sambaDisplay.ToString("F2");
                 }
             }
         }
@@ -160,4 +166,10 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void Reset()
+    {
+        multiDecayTimer = 1;
+        sambaLight.enabled = false;
+        anim.SetBool("Samba", false);
+    }
 }

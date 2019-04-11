@@ -17,7 +17,6 @@ public class ScoreManager : MonoBehaviour
 	
     public void AddScore(int point)
     {
-        print("add score called");
         score += point *multiplier;
         if (score >= HighScore)
         {

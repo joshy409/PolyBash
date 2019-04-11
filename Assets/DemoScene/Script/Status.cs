@@ -49,6 +49,7 @@ public class Status : MonoBehaviour {
                 anim.SetBool("GetUp",true);
                 anim.SetBool("Death", false);
                 gameOver = false;
+                movement.Reset();
             }
         }
 
@@ -63,8 +64,10 @@ public class Status : MonoBehaviour {
             Destroy(enemy);
         }
         fadeOut.SetBool("Fade",false);
-        startGame.SetActive(true);
         isDown = true;
+        movement.moving = false;
+        ScoreManager.Reset();
+        startGame.SetActive(true);
     }
 
     void OnTriggerEnter(Collider col)
@@ -84,7 +87,8 @@ public class Status : MonoBehaviour {
         movement.moving = true;
         if (playerText.enabled)
         {
-            playerText.text = "Put Both of Hand Inside the Trigger Box";
+            playerText.text = "Character Mirrors your hand movements!\nPut Both of Hand Inside the Trigger Box";
+
             rightHadukenTrigger.GetComponent<BoxCollider>().enabled = true;
         }
     }

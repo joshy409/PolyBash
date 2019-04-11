@@ -10,12 +10,14 @@ public class AIController : MonoBehaviour {
     NavMeshAgent navi;
     Animator anim;
     AIFight fight;
+    AIStatus status;
     public bool isAttacking = false;
     [SerializeField] CapsuleCollider leftHandTrigger;
     [SerializeField] CapsuleCollider rightHandTrigger;
 
     void Start()
     {
+        status = GetComponent<AIStatus>();
         navi = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         fight = GetComponent<AIFight>();
@@ -59,6 +61,11 @@ public class AIController : MonoBehaviour {
             rightHandTrigger.enabled = false;
         }
 
+        if (!status.isAlive)
+        {
+            navi.enabled = false;
+        }
+
     }
 
     float DistanceToPlayer()
@@ -68,6 +75,6 @@ public class AIController : MonoBehaviour {
     }
     public bool WantsNavAgentEnabled()
     {
-        return !(player.GetComponent<Status>().isDown || DistanceToPlayer() <= attackDistance);
+        return !(player.GetComponent<Status>().isDown || DistanceToPlayer() <= attackDistance || status.isAlive);
     }
 }

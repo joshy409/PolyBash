@@ -48,7 +48,7 @@ public class DummyScript : MonoBehaviour
         {
             stunTimer = 0;
             if(aiController != null) { 
-                if (nav && tf.position.y<=floorHeight+Mathf.Epsilon&&aiController.WantsNavAgentEnabled())
+                if (nav && tf.position.y<=floorHeight+Mathf.Epsilon && aiController.WantsNavAgentEnabled())
                 {
                     nav.enabled = true;
                 }    

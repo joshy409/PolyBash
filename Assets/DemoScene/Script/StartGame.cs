@@ -13,23 +13,24 @@ public class StartGame : MonoBehaviour {
     [SerializeField] TextMeshPro playerText;
     [SerializeField] TextMeshPro scoreText;
     [SerializeField] TextMeshPro highScoreText;
+    [SerializeField] Movement movement;
 
 
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            punchingBag.SetActive(false);
-            leftWireFrame.SetActive(false);
-            rightWireFrame.SetActive(false);
-            finishWireFrame.SetActive(false);
-            ScoreManager.Reset();
-            playerText.enabled = false;
-            enemySpawner.enabled = true;
-            highScoreText.enabled = true;
-            scoreText.enabled = true;
-            gameObject.SetActive(false);
-        }
+       
+        punchingBag.SetActive(false);
+        leftWireFrame.SetActive(false);
+        rightWireFrame.SetActive(false);
+        finishWireFrame.SetActive(false);
+        ScoreManager.Reset();
+        playerText.enabled = false;
+        enemySpawner.enabled = true;
+        highScoreText.enabled = true;
+        scoreText.enabled = true;
+        movement.Reset();
+        gameObject.SetActive(false);
+        
     }
 }
